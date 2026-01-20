@@ -6,6 +6,7 @@ import Buscar from '../../pages/Buscar';
 
 function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false); // Estado para controlar el menú
   // Usar archivo local en 'public' para evitar bloqueos
   const audioRef = React.useRef(new Audio(process.env.PUBLIC_URL + "/pokemon-center.mp3"));
 
@@ -37,6 +38,7 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
 
   return (
     <Navbar
+      expanded={expanded} // Controlado por estado
       expand="lg"
       className="pokedex-navbar"
       sticky="top"
@@ -44,7 +46,12 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
       style={{ padding: '0.5rem 1rem', minHeight: '60px' }}
     >
       <Container fluid>
-        <Link to="/" className="navbar-brand d-flex flex-column align-items-center" style={{ lineHeight: '1', padding: '2px 0', textDecoration: 'none', color: 'inherit' }}>
+        <Link
+          to="/"
+          className="navbar-brand d-flex flex-column align-items-center"
+          style={{ lineHeight: '1', padding: '2px 0', textDecoration: 'none', color: 'inherit' }}
+          onClick={() => setExpanded(false)} // Cerrar menú al hacer clic en Home
+        >
           <img
             src={logo}
             alt="Pokedex Logo"
@@ -54,7 +61,12 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
           <span style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '4px' }}>Pokedex</span>
         </Link>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" style={{ border: 'none', padding: '0.25rem 0.5rem' }} />
+        {/* Toggle controla el estado expanded */}
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          style={{ border: 'none', padding: '0.25rem 0.5rem' }}
+          onClick={() => setExpanded(expanded ? false : "expanded")}
+        />
 
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="d-flex flex-column flex-lg-row align-items-center justify-content-between w-100 mt-3 mt-lg-0">
