@@ -251,6 +251,17 @@ body.dark-mode .shiny-switch.active {
   }
 }
 
+/* Custom Container Width Override */
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+  width: 93%;
+}
+
 /* Soporte Dark Mode Loader */
 body.dark-mode .pokeball-loader {
   border-color: #e0e0e0;
