@@ -7,7 +7,7 @@ import Buscar from '../../pages/Buscar';
 function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
   const [isPlaying, setIsPlaying] = React.useState(false);
   // Usar archivo local en 'public' para evitar bloqueos
-  const audioRef = React.useRef(new Audio("/pokemon-center.mp3"));
+  const audioRef = React.useRef(new Audio(process.env.PUBLIC_URL + "/pokemon-center.mp3"));
 
   React.useEffect(() => {
     audioRef.current.volume = 0.1; // Volumen muy bajo (10%)
@@ -44,7 +44,7 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
       style={{ padding: '0.5rem 1rem', minHeight: '60px' }}
     >
       <Container fluid>
-        <a href="/" className="navbar-brand d-flex flex-column align-items-center" style={{ lineHeight: '1', padding: '2px 0', textDecoration: 'none', color: 'inherit' }}>
+        <Link to="/" className="navbar-brand d-flex flex-column align-items-center" style={{ lineHeight: '1', padding: '2px 0', textDecoration: 'none', color: 'inherit' }}>
           <img
             src={logo}
             alt="Pokedex Logo"
@@ -52,7 +52,7 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
             className="d-block"
           />
           <span style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '4px' }}>Pokedex</span>
-        </a>
+        </Link>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" style={{ border: 'none', padding: '0.25rem 0.5rem' }} />
 
