@@ -43,18 +43,18 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
       className="pokedex-navbar"
       sticky="top"
       variant={darkMode ? 'dark' : 'light'}
-      style={{ padding: '0.5rem 1rem', minHeight: '60px' }}
+      style={{ padding: '0.5rem 2rem', minHeight: '60px' }}
     >
       <Container fluid>
-        <Link
-          to="/"
+        <a
+          href={process.env.PUBLIC_URL + "/"}
           className="navbar-brand d-flex flex-column align-items-center"
           style={{
             lineHeight: '1',
             padding: '2px 0',
             textDecoration: 'none',
             color: 'inherit',
-            marginLeft: '15px' // Margen izquierdo extra
+            marginLeft: '0'
           }}
           onClick={() => setExpanded(false)} // Cerrar menú al hacer clic en Home
         >
@@ -65,7 +65,7 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
             className="d-block"
           />
           <span style={{ fontSize: '18px', fontWeight: 'bold', marginTop: '4px' }}>Pokedex</span>
-        </Link>
+        </a>
 
         {/* Toggle controla el estado expanded */}
         <Navbar.Toggle
@@ -73,7 +73,7 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
           style={{
             border: 'none',
             padding: '0.25rem 0.5rem',
-            marginRight: '15px' // Margen derecho extra
+            marginRight: '0'
           }}
           onClick={() => setExpanded(expanded ? false : "expanded")}
         />
