@@ -1,0 +1,33 @@
+/* src/pages/Buscar.css */
+
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    margin-bottom: 20px !important;
+}
+
+.search-bar-container form {
+    width: 100%;
+    max-width: 600px; 
+}
+
+.search-input {
+    padding: 15px 25px !important;
+    border-radius: 30px !important; 
+    border: 2px solid #ccc !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #3b5998 !important; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        width: 90% !important;
+    }
+}

@@ -1,14 +1,267 @@
+/* src/App.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f7f6;
+  /* Fondo gris claro */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* --- Estilos de Navegación --- */
+
+.pokedex-navbar {
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.95) 60%,
+      rgba(255, 255, 255, 0) 100%) !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding: 10px 0 30px 0 !important;
+  /* Más espacio inferior para el degradado */
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1050 !important;
+  /* Por encima de los filtros y contenido */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.pokedex-navbar .navbar-brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333 !important;
+  text-decoration: none;
+}
+
+.pokedex-navbar .nav-link {
+  font-weight: 500;
+  color: #555 !important;
+  margin-left: 15px;
+  transition: color 0.3s;
+}
+
+.pokedex-navbar .nav-link:hover {
+  color: #d11a2a !important;
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  padding: 0px 0;
+  margin-bottom: 0px !important;
+}
+
+.search-input {
+  background: linear-gradient(to right, #ffffff, #f0f2f5) !important;
+  border: 1px solid #ddd !important;
+  border-radius: 20px !important;
+  padding: 10px 20px !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease !important;
+}
+
+.search-input:focus {
+  background: #ffffff !important;
+  box-shadow: 0 0 0 0.2rem rgba(209, 26, 42, 0.25) !important;
+  border-color: #d11a2a !important;
+  transform: scale(1.02);
+}
+
+/* --- Switch Styles (Common) --- */
+.theme-switch,
+.shiny-switch {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 34px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  margin-left: 15px;
+}
+
+.theme-switch.dark {
+  background-color: #6610f2;
+}
+
+.shiny-switch.active {
+  background-color: #ffcc00;
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
+}
+
+.theme-switch-slider {
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.theme-switch.dark .theme-switch-slider,
+.shiny-switch.active .theme-switch-slider {
+  transform: translateX(26px);
+}
+
+.theme-icon,
+.shiny-icon {
+  font-size: 10px;
+  line-height: 1;
+  z-index: 10;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.5;
+  transition: all 0.3s;
+  display: flex !important;
+}
+
+.theme-switch.dark .theme-icon,
+.shiny-switch.active .shiny-icon {
+  opacity: 1;
+}
+
+.theme-icon.moon {
+  color: #f1c40f;
+  margin-left: auto;
+}
+
+.theme-icon.sun {
+  color: #f39c12;
+}
+
+.shiny-icon {
+  margin-left: auto;
+}
+
+.shiny-switch.active .shiny-icon {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Dark Mode Body */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #f0f0f0;
+}
+
+body.dark-mode .pokedex-navbar {
+  background: linear-gradient(to bottom,
+      rgba(31, 31, 31, 1) 0%,
+      rgba(31, 31, 31, 0.95) 60%,
+      rgba(31, 31, 31, 0) 100%) !important;
+}
+
+body.dark-mode .search-input {
+  background: linear-gradient(to right, #3d3d3d, #2d2d2d) !important;
+  color: #fff !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode .search-input::placeholder {
+  color: #aaa;
+}
+
+body.dark-mode .theme-switch,
+body.dark-mode .shiny-switch {
+  background-color: #444;
+}
+
+body.dark-mode .shiny-switch.active {
+  background-color: #b8860b;
+}
+
+/*Loader Pokeball Minimalista*/
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  width: 100%;
+}
+
+.pokeball-loader {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: white;
+  border: 5px solid #333;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: spin 1.5s linear infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pokeball-loader::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  /* Ajuste por el borde */
+  left: -5px;
+  /* Ajuste por el borde */
+  width: calc(100% + 10px);
+  height: calc(50% + 5px);
+  background: #ff5350;
+  border-bottom: 5px solid #333;
+  box-sizing: border-box;
+}
+
+.pokeball-loader::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 5px solid #333;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Soporte Dark Mode Loader */
+body.dark-mode .pokeball-loader {
+  border-color: #e0e0e0;
+  background: #e0e0e0;
+  /* Parte inferior clara */
+}
+
+body.dark-mode .pokeball-loader::before {
+  border-bottom-color: #e0e0e0;
+}
+
+body.dark-mode .pokeball-loader::after {
+  border-color: #e0e0e0;
 }

@@ -1,28 +1,50 @@
 import React from "react";
-
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
-//pages
-import Home from "./pages/Home";
 import ListaPokemon from "./pages/ListaPokemon";
-import Buscar from "./pages/Buscar";
-import BuscarPokemon from "./pages/BuscarPokemon";
 
 import "./App.css";
 
 function App() {
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [darkMode, setDarkMode] = React.useState(false);
+  const [isShiny, setIsShiny] = React.useState(false);
+
+  React.useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [darkMode]);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
+  const toggleShiny = () => setIsShiny(!isShiny);
+
   return (
     <React.Fragment>
       <BrowserRouter>
-        <Navigation />
-        <div  className="container-fluid" >
-        <Switch >
-          <Route exact={true} path="/listapokemon" component={ListaPokemon} />
-          <Route exact={true} path="/buscar" component={Buscar} />
-          <Route exact={true} path="/buscarpokemon" component={BuscarPokemon} />
-          <Route exact={true} path="/" component={Home} />
-        </Switch>
-
+        <Navigation
+          onSearch={setSearchTerm}
+          darkMode={darkMode}
+          toggleTheme={toggleTheme}
+          isShiny={isShiny}
+          toggleShiny={toggleShiny}
+        />
+        <div className="container-fluid" >
+          <Switch >
+            <Route
+              exact={true}
+              path="/"
+              render={(props) => (
+                <ListaPokemon
+                  {...props}
+                  globalSearchTerm={searchTerm}
+                  isShiny={isShiny}
+                />
+              )}
+            />
+          </Switch>
         </div>
       </BrowserRouter>
     </React.Fragment>

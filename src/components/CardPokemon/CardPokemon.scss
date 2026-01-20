@@ -1,103 +1,377 @@
+/* src/components/CardPokemon/CardPokemon.scss */
+
 .card-pokemon {
   font-family: "Poppins", sans-serif;
-  border-radius: 30px;
+  border-radius: 15px;
   text-align: start;
-  border-left: 5px solid gray;
-  height: 420px;
-  // transition: 1s;
+  border: 0 !important;
+  outline: none !important;
+  width: 100%;
+  max-width: 312px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 450px; // Altura base fija para uniformidad
+  padding-bottom: 10px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: visible;
+  animation: cardAppear 0.5s ease-out forwards;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
 
-  .card-body{
-    padding: 20px 15px 5px 15px;
-    margin-bottom: 0;
+  &.expanded {
+    height: auto;
+    min-height: 450px;
   }
-  
+
+  .card-body {
+    padding: 15px 12px 5px 12px;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   .card-img-top {
     position: absolute;
-    bottom: 240px;
-    left: 150px;
-    z-index: 0;
-    transition: 0.4s;
+    top: -45px;
+    right: -40px;
+    z-index: 20;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 150px;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.3));
+    will-change: transform, filter; // Optimización de rendimiento
   }
-
 
   &:hover {
-    border-left: 5px solid black;
-    transform: scale(1.05);
-    z-index: 2;
+    transform: translateY(-12px) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    z-index: 1000 !important;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 15px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent);
+      pointer-events: none;
+      z-index: 5;
+    }
 
     .card-img-top {
-       width: 250px !important;
+      width: 195px !important;
+      transform: translate(25px, -25px) scale(1.1) rotate(5deg);
+      filter:
+        drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) drop-shadow(10px 10px 30px rgba(0, 0, 0, 0.5)) brightness(1.2);
+      animation: floatingEpic 3s ease-in-out infinite alternate;
     }
   }
-  
+
   .text-uppercase {
-    font-size: 22px;
+    font-size: 18px;
     color: #ffffff;
-    text-shadow:  4px -1px 4px #000000;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   }
 
-  p {
+  .card-text {
     color: #fff;
-    text-shadow: 1px -1px 5px black;
+    font-weight: 700;
+    font-size: 11px;
+    margin-bottom: 0px; // Reducido para compactar
+    line-height: 1.2;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   }
 
+  /* --- STATS --- */
+  .stats-container {
+    background: rgba(0, 0, 0, 0.15);
+    padding: 6px 8px; // Padding más ajustado
+    border-radius: 10px;
+    margin-bottom: 5px; // Margen reducido
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 4px; // Gap reducido
+
+    .stats-title {
+      font-size: 13px;
+      margin-bottom: 4px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .stat-item {
+      .stat-name {
+        width: 60px; // Reducido
+        font-size: 11px; // Reducido
+        color: #fff;
+        line-height: 1.1;
+        font-weight: 800;
+        text-shadow: 1px 1px 2px #000;
+        white-space: nowrap;
+        text-align: right;
+      }
+
+      .stat-bar-wrapper {
+        height: 12px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 7px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        margin-left: 10px;
+        position: relative;
+
+        .stat-bar {
+          height: 100%;
+          border-radius: 7px;
+          transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          padding-right: 5px;
+          position: relative;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          overflow: hidden; // Para que el brillo no se salga
+
+          // Efecto de brillo animado (Shine)
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent);
+            transform: skewX(-25deg);
+            animation: shine-bar 3s infinite;
+          }
+
+          // Degradado superior para profundidad
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+            pointer-events: none;
+          }
+        }
+
+        .stat-value {
+          color: white;
+          font-weight: 900;
+          text-shadow: 1px 1px 2px #000;
+          font-size: 11px;
+          z-index: 2;
+          position: relative;
+        }
+      }
+    }
+  }
+
+  /* --- TYPES --- */
   .tipo-pokemon {
     display: flex;
-    justify-content: space-around;
-    margin: 15px 0;
-
+    justify-content: center; // Centrar tipos
+    gap: 6px;
+    margin-bottom: 5px;
 
     button {
-      padding: 2px 18px;
-      border-radius: 30px;
-      border-color: #000;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 14px;
+      padding: 3px 12px; // Más pequeños
+      color: #fff;
+      font-size: 11px; // Reducido
+      font-weight: 800;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+
+      &:hover {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+      }
     }
   }
 
-  .name-evolution {
-    font-size: 15px;
-    text-align: center;
+  /* --- SHARED SCROLL STYLES --- */
+  .evolution-scroll-wrapper,
+  .varieties-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 0; // Ajustado a 10px según pedido
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 10;
+    cursor: grab; // Indicar que se puede arrastrar
+    user-select: none; // Evitar seleccionar texto al arrastrar
+
+    &.grabbing {
+      cursor: grabbing;
+    }
+
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
   }
 
+  .evolution-list,
+  .varieties-list {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding: 0 15px;
+    list-style: none;
+    margin: 0 auto; // Centrado mágico cuando hay pocos elementos
+    width: fit-content; // El contenedor se ajusta al número de items
+    //justify-content: center; // Eliminado justify-content que causaba el corte lateral
+
+    li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 0 0 70px; // Reducido de 95px
+      position: relative;
+      transition: z-index 0.3s;
+
+      &:hover {
+        z-index: 500; // Elevar el item completo
+      }
+
+      img {
+        width: 70px !important;
+        height: auto;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+        position: relative;
+        z-index: 5; // Un poco más alto base
+
+        &:hover {
+          transform: scale(1.25) translateY(-5px);
+          z-index: 9999 !important;
+          filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
+        }
+      }
+
+      small {
+        color: #fff;
+        font-weight: 700;
+        font-size: 9px;
+        text-shadow: 1px 1px 2px #000;
+        text-align: center;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .evolution-container,
+  .varieties-collapsible {
+    position: relative;
+    z-index: 100;
+  }
+
+  .varieties-toggle-btn {
+    transition: all 0.2s ease;
+    border-radius: 8px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  .transform-transition {
+    display: inline-block;
+    transition: transform 0.3s;
+  }
+
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
 }
 
+/* Animations */
+.anime-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
 
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
 
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 
+@keyframes floatingEpic {
+  0% {
+    transform: translate(25px, -25px) scale(1.1) rotate(5deg);
+  }
 
+  50% {
+    transform: translate(30px, -40px) scale(1.15) rotate(0deg);
+  }
 
-// .card-pokemon {
-//   font-family: "Poppins", sans-serif;
-//   border-radius: 50px;
-//   text-align: start;
-//   border-left: 5px solid gray;
+  100% {
+    transform: translate(20px, -30px) scale(1.1) rotate(-5deg);
+  }
+}
 
-//   .text-uppercase {
-//     font-size: 22px;
-//     &:hover {
-//       color: blue;
-//     }
-//   }
+@keyframes shine-bar {
+  0% {
+    left: -100%;
+  }
 
-//   .card-img-top {
-//     position: absolute;
-//     bottom: 210px;
-//     left: 150px;
-//     z-index: 1;
-//   }
+  20% {
+    left: 100%;
+  }
 
-//   &:hover {
-//     border-left: 5px solid black;
-
-//     .text-uppercase {
-//       color: blue;
-//     }
-
-//     .card-img-top {
-//       width: 280px !important;
-//       zoom: 1;
-//     }
-//   }
-// }
+  100% {
+    left: 100%;
+  }
+}
