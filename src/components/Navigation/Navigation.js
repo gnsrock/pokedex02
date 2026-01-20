@@ -49,7 +49,13 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
         <Link
           to="/"
           className="navbar-brand d-flex flex-column align-items-center"
-          style={{ lineHeight: '1', padding: '2px 0', textDecoration: 'none', color: 'inherit' }}
+          style={{
+            lineHeight: '1',
+            padding: '2px 0',
+            textDecoration: 'none',
+            color: 'inherit',
+            marginLeft: '15px' // Margen izquierdo extra
+          }}
           onClick={() => setExpanded(false)} // Cerrar menú al hacer clic en Home
         >
           <img
@@ -64,7 +70,11 @@ function Navigation({ onSearch, darkMode, toggleTheme, isShiny, toggleShiny }) {
         {/* Toggle controla el estado expanded */}
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
-          style={{ border: 'none', padding: '0.25rem 0.5rem' }}
+          style={{
+            border: 'none',
+            padding: '0.25rem 0.5rem',
+            marginRight: '15px' // Margen derecho extra
+          }}
           onClick={() => setExpanded(expanded ? false : "expanded")}
         />
 
