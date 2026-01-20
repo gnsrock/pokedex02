@@ -23,7 +23,7 @@ function App() {
 
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Navigation
           onSearch={setSearchTerm}
           darkMode={darkMode}
