@@ -47,30 +47,42 @@
     will-change: transform, filter; // Optimización de rendimiento
   }
 
-  &:hover {
-    transform: translateY(-12px) rotate(1deg);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    z-index: 1000 !important;
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-12px) rotate(1deg);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      z-index: 1000 !important;
 
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 15px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent);
-      pointer-events: none;
-      z-index: 5;
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 15px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent);
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      .card-img-top {
+        width: 195px !important;
+        transform: translate(25px, -25px) scale(1.1) rotate(5deg);
+        filter:
+          drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) drop-shadow(10px 10px 30px rgba(0, 0, 0, 0.5)) brightness(1.2);
+        animation: floatingEpic 3s ease-in-out infinite alternate;
+      }
     }
+  }
 
-    .card-img-top {
-      width: 195px !important;
-      transform: translate(25px, -25px) scale(1.1) rotate(5deg);
-      filter:
-        drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) drop-shadow(10px 10px 30px rgba(0, 0, 0, 0.5)) brightness(1.2);
-      animation: floatingEpic 3s ease-in-out infinite alternate;
+  /* Efecto Táctil para Móviles (Sin Scroll Horizontal) */
+  @media (hover: none) {
+    &:active {
+      transform: scale(0.96);
+      /* Se achica sutilmente al tocar */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.1s ease;
     }
   }
 
