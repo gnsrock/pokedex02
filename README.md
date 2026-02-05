@@ -1,68 +1,76 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 📱 Pokédex App
 
-## Available Scripts
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Sass](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
-In the project directory, you can run:
+Una aplicación web moderna y responsiva que simula una Pokédex, permitiendo a los usuarios explorar el mundo Pokémon con una interfaz elegante y funcional. Este proyecto consume la [PokeAPI](https://pokeapi.co/) para mostrar información detallada, evoluciones y estadísticas.
 
-### `yarn start`
+🔗 **[Ver Demo en Vivo](https://gnsrock.github.io/pokedex02/)**
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## ✨ Características Principales
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+-   **🔍 Búsqueda Inteligente:** Busca Pokémon por su nombre o número de Pokédex nacional.
+-   **🏷️ Filtrado por Tipos:** Filtra resultados fácilmente seleccionando tipos específicos (Fuego, Agua, Planta, etc.).
+-   **🌗 Modo Oscuro/Claro:** Interfaz adaptable con soporte completo para tema oscuro, ideal para navegar de noche.
+-   **📈 Detalles Completos:** Visualiza estadísticas base, habilidades, tipos y descripciones.
+-   **🧬 Cadenas de Evolución:** Explora las evoluciones de cada Pokémon con una vista intuitiva.
+-   **📱 Diseño Responsivo:** Totalmente optimizado para dispositivos móviles, tablets y escritorio.
 
-### `yarn test`
+## 🛠️ Tecnologías Utilizadas
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Este proyecto demuestra el uso de tecnologías modernas de desarrollo frontend:
 
-### `yarn build`
+-   **React.js**: Librería principal para la construcción de la interfaz.
+-   **React Bootstrap & Bootstrap 5**: Para un sistema de rejilla robusto y componentes estilizados.
+-   **Sass (SCSS)**: Para estilos modulares y avanzados.
+-   **React Router**: Manejo de navegación SPA (Single Page Application).
+-   **PokeAPI**: API RESTful de terceros para obtener los datos.
+-   **Context API**: Manejo del estado global para funcionalidades como el Modo Oscuro.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Instalación y Ejecución Local
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Si deseas correr este proyecto en tu máquina local, sigue estos pasos:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/gnsrock/pokedex02.git
+    cd pokedex02
+    ```
 
-### `yarn eject`
+2.  **Instalar dependencias:**
+    ```bash
+    npm install
+    # o si usas yarn
+    yarn install
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3.  **Iniciar el servidor de desarrollo:**
+    ```bash
+    npm start
+    # o
+    yarn start
+    ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    La aplicación correrá en `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 📂 Estructura del Proyecto
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+pokedex02/
+├── public/          # Archivos estáticos
+├── src/
+│   ├── components/  # Componentes reutilizables (Cards, Header, etc.)
+│   ├── pages/       # Vistas principales (Home, Details)
+│   ├── styles/      # Archivos SCSS globales y módulos
+│   ├── utils/       # Funciones auxiliares y constantes
+│   └── App.js       # Componente raíz y configuración de rutas
+└── package.json     # Dependencias y scripts
+```
 
-## Learn More
+## 📬 Contacto
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Si tienes alguna pregunta o sugerencia sobre este proyecto, no dudes en contactarme.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+---
+*Desarrollado con ❤️ por [Gabriel](https://github.com/gnsrock)*

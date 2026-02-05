@@ -20,7 +20,32 @@ serviceWorker.unregister();
 
 //direccion Api pokemon
 //https://pokeapi.co/docs/v2#pokemon-section
-// Deployment trigger 2026-01-22
-console.log("Deployment check 2026-01-22");
+// Deployment trigger 2026-01-22 - Versión: 1.0.2
+console.log("Deployment check 2026-01-22 v1.0.2");
+
+// Solución técnica: Limpiar Service Workers y Caché anterior
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function (registrations) {
+    for (let registration of registrations) {
+      registration.unregister();
+      console.log('Service Worker desregistrado');
+    }
+  });
+}
+
+if ('caches' in window) {
+  caches.keys().then(function (names) {
+    for (let name of names) {
+      caches.delete(name);
+      console.log('Caché eliminada:', name);
+    }
+  });
+}
+
+// Recarga forzada opcional si detecta versión vieja (mantenido simple por ahora)
+if (localStorage.getItem('app_version') !== '1.0.2') {
+  localStorage.setItem('app_version', '1.0.2');
+  // window.location.reload(true); // Solo habilitar si es estrictamente necesario
+}
 
 
